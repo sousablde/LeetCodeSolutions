@@ -25,15 +25,11 @@ class Solution {
 
 
         //this for loop will start iterating through the last element
-//        //to cover test cases with only zeros I will keep a zero counter
-//        int zerCounter = 0;
+        //to cover test cases with only zeros I will keep a zero counter
+        int zerCounter = 0;
         for (int i = longest; i > 0; i--) {
+            sum[i] = sum[i] + as[i - 1] + bs[i - 1];
 
-            if (sum[i] == 0 && as[i - 1] == 0 && bs[i - 1] == 0) {
-                sum[i] = 0;
-            } else {
-                sum[i] = sum[i] + as[i - 1] + bs[i - 1];
-            }
             if (sum[i] == 2) {
                 sum[i] = 0;
                 sum[i - 1] = 1;
@@ -42,14 +38,13 @@ class Solution {
                 sum[i - 1] = 1;
             }
 
-//            if(sum[i] == 0){
-//                zerCounter++;
-//            }
+            if (sum[i] == 0) {
+                zerCounter++;
+            }
         }
-//        result = Arrays.toString(sum).replaceAll("\\[|\\]|,|\\s", "");
-//        if(zerCounter == longest+1){
-//            result = "0";
-//        }
+        if (zerCounter == longest) {
+            return "0";
+        }
 
         return Arrays.toString(sum).replaceAll("\\[|\\]|,|\\s", "");
     }
